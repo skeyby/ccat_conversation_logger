@@ -1,6 +1,6 @@
 # ccat_conversation_logger - Cheshire Cat AI Conversation Logger
 
-![./logo.jpg]
+![Plugin Logo](./logo.jpg)
 
 This Cheshire Cat AI plugin hooks in to the conversation workflow between Cheshire Cat and the User keeping a log of the ongoing conversation.
 
