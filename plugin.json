@@ -1,0 +1,10 @@
+{
+    "name": "CCat Conversation Logger",
+    "version": "0.0.1",
+    "description": "Cheshire Cat AI plugin to log the ongoing conversations.",
+    "author_name": "Andrea Brancatelli, Ilario Febi",
+    "author_url": "https://andrea.brancatelli.it/",
+    "plugin_url": "https://github.com/skeyby/ccat_conversation_logger",
+    "tags": "log, memory, advanced",
+    "thumb": "https://raw.githubusercontent.com/skeyby/ccat_conversation_logger/main/logo.jpg"
+}
