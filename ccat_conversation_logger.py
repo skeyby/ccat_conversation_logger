@@ -17,7 +17,8 @@ DEFAULT_SQLITE_FILEPATH = 'sqlite:///cat/data/conv_log.db'
 class PluginSettings(BaseModel):
     db_dsn: str = Field(
         default=DEFAULT_SQLITE_FILEPATH,
-        title="Sqlite filepath. Change it only if you know what you are doing!",
+        title="Please enter the DNS configuration:",
+        description="Valid DSNs: sqlite:///path/database.sql or mysql+pymysql://user:password@host/database or postgresql://user:password@host/database"
     )
 
 @plugin
@@ -48,9 +49,9 @@ engine = None
 def before_cat_sends_message(message, cat):
     global engine
     DSN = cat.mad_hatter.get_plugin().load_settings()["db_dsn"]
-    engine = create_engine(DSN)
-    Base.metadata.create_all(engine, checkfirst=True)
     if message.type == 'chat':
+        engine = create_engine(DSN)
+        Base.metadata.create_all(engine, checkfirst=True)
         log.info(f"CCat Conversation Logger is logging a message from: {message.user_id}")
         with Session(engine) as session:
             try:
@@ -63,7 +64,7 @@ def before_cat_sends_message(message, cat):
                 session.commit()
             except Exception as e:
                 session.rollback()
-                log.error(f"Something weird happened: {str(e)}. Conversation NOT logged to DSN {DSN}")
+                log.error(f"Something weird happened inserting the conversation: {str(e)}. Conversation NOT logged to DSN {DSN}")
                 return message
 
     return message
